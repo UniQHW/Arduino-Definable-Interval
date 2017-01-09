@@ -8,7 +8,7 @@ useful functions for time_stamp reading and writing. To build a interval, create
 desired function. This function is then executed on every interval. To start a interval, execute the interval() member function inside of your desired loop.
 The function will not delay runtime, instead it will skip until the next interval.
 
-![interval()](Interval.png)
+![interval()](rsc/Interval.png)
 
 ### Usage
 
