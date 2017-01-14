@@ -19,7 +19,7 @@
  * The goal of this library is to provide a solution for tasks that require some kind of interval pattern,
  * while barely interfearing with the entire runtime time process ulike delays. This is done by Protothreading using time stamps that get checked 
  * in an regulare pattern, being the interval. For simple time stamp interreaction, use the timestamp class that is packed with various 
- * useful functions for time_stamp reading and writing. To build a interval, create an instance of definable_interval and refference onInterval to your
+ * useful functions for timestamp reading and writing. To build a interval, create an instance of definable_interval and refference onInterval to your
  * desired function. This function is then executed on every interval. To start a interval, execute the interval() member function inside of your desired loop.
  * The function will not delay runtime, instead it will skip until the interval time is reached.
  */
@@ -29,16 +29,19 @@
 
 #include <Arduino.h>
 
+typedef unsigned long time;
 typedef unsigned long time_ms;
+typedef unsigned long time_us;
 
 struct timestamp {
-  timestamp();
+  timestamp(time (*f)() = &millis);
   void setStamp();
-  void setStamp(time_ms ms);
-  bool olderThan(time_ms ms);
+  void setStamp(time t);
+  bool olderThan(time t);
   bool expired();
-  time_ms timeSinceStamp();
-  time_ms stamp;
+  time timeSinceStamp();
+  time stamp;
+  time (*getTime)(); // Pointer to time function (millis() or micros() etc.). Default assigned to milis();
 };
 
 struct definable_interval {

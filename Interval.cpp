@@ -24,33 +24,33 @@ typedef unsigned long time_ms;
 /* --- Time Stamp --- */
 
 /* Set stamp on Initialization */
-timestamp::timestamp() {
-	stamp = millis();
+timestamp::timestamp(time (*f)() = &millis) : getTime(f) {
+	stamp = getTime();
 }
 
 /* Set stamp */
 void timestamp::setStamp() {
-	stamp = millis();
+	stamp = getTime();
 }
 
 /* Setting stamp in future (or even past) */
-void timestamp::setStamp(time_ms ms) {
-	stamp = millis() + ms;
+void timestamp::setStamp(time t) {
+	stamp = getTime() + t;
 }
 
 /* Check wether stamp has expired a specific time */
-bool timestamp::olderThan(time_ms ms) {
-	return (millis() >= stamp + ms);
+bool timestamp::olderThan(time t) {
+	return (getTime() >= stamp + t);
 }
 
 /* Check wether future stamp has expired (awlays true on setStamp() */
 bool timestamp::expired() {
-	return (millis() >= stamp);
+	return (getTime() >= stamp);
 }
 
 /* Get passed time since stamp (in ms) */
 time_ms timestamp::timeSinceStamp() {
-	return millis() - stamp;
+	return getTime() - stamp;
 }
 
 /* --- Interval --- */
