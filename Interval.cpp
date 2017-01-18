@@ -22,7 +22,7 @@
 /* --- Time Stamp --- */
 
 /* Set stamp on Initialization */
-timestamp::timestamp(time (*f)() = &millis) : getTime(f) {
+timestamp::timestamp(time (*f)()) : getTime(f) {
 	stamp = getTime();
 }
 
