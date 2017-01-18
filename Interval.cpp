@@ -19,8 +19,6 @@
 
 #include "Interval.h"
 
-typedef unsigned long time_ms;
-
 /* --- Time Stamp --- */
 
 /* Set stamp on Initialization */
